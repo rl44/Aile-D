@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Routeurs Alcatel 7750 SR7</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Routeurs Alcatel 7750 SR7</h1>
+<h3 class="date">2016/09/27 10:14:26</h3>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#alimentation">Alimentation</a><ul>
+<li><a href="#alimentation--48v-dc-courant-continu">Alimentation -48V DC (courant continu)</a></li>
+</ul></li>
+<li><a href="#console">Console</a></li>
+<li><a href="#références-techniques">Références techniques</a></li>
+</ul>
+</nav>
+<pre class="[.sh]"><code>$ pandoc --standalone --to html5 --toc &lt;index.md &gt;index.html             </code></pre>
+<hr />
+<style type="text/css" media="all">
+    body {
+        counter-reset:  h1counter;
+    }
+    
+    body > h1:before {
+        content: counter(h1counter) ".\0000a0\0000a0";
+        counter-increment: h1counter;
+        counter-reset: h2counter;
+    }
+    
+    body > h2:before {
+        content: counter(h2counter) ".\0000a0\0000a0";
+        counter-increment: h2counter;
+        counter-reset: h3counter;
+    }
+    
+    body > h3:before {
+        content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+        counter-increment: h3counter;
+    }
+
+</style>
+<h1 id="alimentation">Alimentation</h1>
+<figure>
+<img src="http://d3d71ba2asa5oz.cloudfront.net/23000103/images/jv-rya-c-sr7pem2-01.jpg" alt="Photo de l&#39;alimentation" /><figcaption>Photo de l'alimentation</figcaption>
+</figure>
+<h2 id="alimentation--48v-dc-courant-continu">Alimentation -48V DC (courant continu)</h2>
+<p>Le <strong>-</strong>48V n'est pas une coquille (cf. p7 du <em>Data sheet</em>), c'est assez original, le <strong>-</strong> est en haut et le <strong>+</strong> en bas, ce dernier semblant être la tension de référence (masse).</p>
+<p>La tolérance de l'alimentation va jusqu'à 80V DC, 60A. Le câblage électrique doit donc être en conséquence (<a href="http://www.solar-wind.co.uk/cable-sizing-DC-cables.html">minimum 2,5mm² (AWG 14), idéalement 4mm² (AWG 12) voire plus...</a> ).</p>
+<h1 id="console">Console</h1>
+<p>Port console, série asynchrone (v24/rs232c), 9600 bauds, 8 bits, sans parité, 1 bit stop.</p>
+<pre class="[.sh]"><code>$ sudo chmod 666 /dev/ttyUSB0
+$ cu --line /dev/ttyUSB0 --speed 9600 # cu -l /dev/ttyUSB0 fonctionne aussi
+Connected.
+
+Login:   
+Login: 
+Login: ~[d012nuc01].   # Touche ~ , attendre 1 sec., touche .
+Disconnected.</code></pre>
+<h1 id="références-techniques">Références techniques</h1>
+<p><a href="https://infoproducts.alcatel-lucent.com/cgi-bin/dbaccessfilename.cgi/9300700701_V1_7750%20SR%20OS%20Basic%20System%20Configuration%20Guide%208.0r1.pdf">7750 SR OS Basic System Configuration Guide</a></p>
+<p><a href="https://www.hpe.com/h20195/v2/GetDocument.aspx?docname=c04640654&amp;doctype=quickspecs&amp;doclang=EN_US&amp;searchquery=&amp;cc=us&amp;lc=en">Quick specs</a></p>
+<p><a href="https://www.hpe.com/h20195/v2/GetDocument.aspx?docname=4AA5-9070ENW&amp;doctype=data%20sheet&amp;doclang=EN_US&amp;searchquery=&amp;cc=us&amp;lc=en">Data sheet</a></p>
+<p><a href="http://www8.hp.com/us/en/products/networking-routers/product-detail.html?oid=8148014">Modular Ethernet Routers Alcatel-Lucent 7750-SR7 Switch Fabric and Control Processor Module DC Power Chassis Starter Bundle (JL136A)</a></p>
+<p><a href="https://www.hpe.com/h20195/v2/default.aspx?cc=us&amp;lc=en&amp;oid=8148014">Alcatel-Lucent 7750 SR7 Switch Fabric and Control Processor Module DC Power Chassis Starter Bundle (JL136A) - Product documentation</a></p>
+<p><a href="http://www.alcatelunleashed.com/">Alcatel Unleashed</a></p>
+<p><a href="https://www.shodan.io">Shodan.io</a></p>
+</body>
+</html>
