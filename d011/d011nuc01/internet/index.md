@@ -24,8 +24,9 @@ transportant de manière transparente les trames de la liaison _PPP_.
 
 ## Traversée transparente de `bastion-out.univ-nantes.fr`
 
-Ce script permet de définir une redirection via la machine `bastion-out.univ-nantes.fr`
-et ajoute une règle de translation d'adresses pour utiliser cette redirection.
+Ce script permet de définir une redirection via la machine
+`bastion-out.univ-nantes.fr` et ajoute une règle de translation
+d'adresses pour utiliser cette redirection.
 
 ~~~~ [.sh .numberLines]
 #!/bin/bash
@@ -93,6 +94,23 @@ sudo iptables -t nat -A OUTPUT -d $DEST_IP -p tcp --dport $DEST_PORT \
 ~~~~
 
 ## Liaison PPP à la demande
+
+### Routes via le réseau universitaire
+
+Il s'agit de préparer une route par défaut via une liaison _PPP_ établie
+à la demande. Il est donc nécessaire que les paquets transportant les
+trames de cette liaison _PPP_ soient acheminés via une route autre que
+la route par défaut. Ici ça concerne essentiellement l'accès à la
+machine `bastion-out.univ-nantes.fr` (`193.52.101.170`) utilisée pour
+passer la session _ssh_, ainsi que le serveur DNS utilisé pour
+d'éventuelles résolutions de noms (`172.19.0.4`).
+
+~~~~ [.sh .numberLines]
+$ sudo ip route add 172.16.0.0/12 via 172.19.32.3 dev br0
+$ sudo ip route add 193.52.101.0/24 via 172.19.32.3 dev br0
+$ sudo ip route add 193.52.104.0/24 via 172.19.32.3 dev br0
+$ sudo ip route del default via 172.19.32.3
+~~~~
 
 La liaison _PPP_ est encapsulée dans une session _ssh_ au moyen de la commande
 suivante :
